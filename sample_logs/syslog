@@ -1,0 +1,29 @@
+May 20 08:00:00 webserver systemd[1]: Started Session 1 of user lev.
+May 20 08:00:01 webserver kernel: [12345.678] eth0: renamed from veth3a1b2c
+May 20 08:00:05 webserver systemd[1]: nginx.service: Main process exited, code=exited, status=1/FAILURE
+May 20 08:00:06 webserver systemd[1]: nginx.service: Failed with result 'exit-code'.
+May 20 08:00:07 webserver systemd[1]: Failed to start A high performance web server and a reverse proxy server.
+May 20 08:00:08 webserver nginx[2001]: 2026/05/20 08:00:08 [error] 2001#2001: bind() to 0.0.0.0:80 failed (98: Address already in use)
+May 20 08:00:10 webserver systemd[1]: Reloading nginx.service - A high performance web server.
+May 20 08:00:11 webserver systemd[1]: Reloaded nginx.service - A high performance web server.
+May 20 08:01:00 webserver cron[1100]: (CRON) INFO (Running @reboot jobs)
+May 20 08:01:30 webserver kernel: [12400.100] oom_reaper: reaped process 3045 (python3), now anon-rss:0kB, file-rss:0kB, shmem-rss:0kB
+May 20 08:02:00 webserver postfix/smtpd[4001]: warning: hostname 203.0.113.0 does not resolve to address 203.0.113.0
+May 20 08:02:01 webserver postfix/smtpd[4001]: NOQUEUE: reject: RCPT from unknown[203.0.113.0]: 554 5.7.1 Service unavailable
+May 20 08:03:00 webserver kernel: [12500.200] nf_conntrack: table full, dropping packet
+May 20 08:03:01 webserver kernel: [12500.201] nf_conntrack: table full, dropping packet
+May 20 08:03:02 webserver kernel: [12500.202] nf_conntrack: table full, dropping packet
+May 20 08:05:00 webserver systemd[1]: docker.service: Main process exited, code=exited, status=1/FAILURE
+May 20 08:05:01 webserver systemd[1]: docker.service: Failed with result 'exit-code'.
+May 20 08:05:02 webserver dockerd[5000]: error: failed to start daemon: error initializing graphdriver: driver not supported
+May 20 08:10:00 webserver systemd[1]: Starting Daily apt upgrade and clean activities...
+May 20 08:10:05 webserver apt[6000]: /usr/bin/apt-get -y -o APT::Get::Trivial-Only=yes upgrade
+May 20 08:10:06 webserver apt[6000]: 0 upgraded, 0 newly installed, 0 to remove and 12 not upgraded.
+May 20 08:15:00 webserver sshd[1237]: Received disconnect from 203.0.113.44 port 33109:11: disconnected by user
+May 20 08:20:00 webserver kernel: [13200.500] EXT4-fs error (device sda1): ext4_validate_block_bitmap:376: comm kworker/u4:2: bg 0: bad block bitmap checksum
+May 20 08:20:01 webserver kernel: [13200.501] EXT4-fs (sda1): delayed block allocation failed for inode 12345 at logical offset 0 with max blocks 8 with error -5
+May 20 08:25:00 webserver systemd[1]: Stopping Session 1 of user lev.
+May 20 08:25:01 webserver systemd[1]: Stopped Session 1 of user lev.
+May 20 09:00:00 webserver cron[1100]: (root) CMD (/usr/local/bin/backup.sh)
+May 20 09:00:05 webserver backup.sh[7000]: error: /mnt/backup not mounted, skipping backup
+May 20 09:30:00 webserver rsyslogd: imuxsock: Acquired UNIX socket '/run/systemd/journal/syslog'

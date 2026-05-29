@@ -1,0 +1,100 @@
+May 20 07:45:01 webserver sshd[1100]: Accepted password for admin from 10.0.0.5 port 60100 ssh2
+May 20 07:45:02 webserver sshd[1100]: pam_unix(sshd:session): session opened for user admin by (uid=0)
+May 20 08:00:01 webserver sshd[1200]: Failed password for root from 185.234.218.4 port 41001 ssh2
+May 20 08:00:03 webserver sshd[1200]: Failed password for root from 185.234.218.4 port 41002 ssh2
+May 20 08:00:05 webserver sshd[1200]: Failed password for root from 185.234.218.4 port 41003 ssh2
+May 20 08:00:07 webserver sshd[1200]: Failed password for admin from 185.234.218.4 port 41004 ssh2
+May 20 08:00:09 webserver sshd[1200]: Failed password for admin from 185.234.218.4 port 41005 ssh2
+May 20 08:00:11 webserver sshd[1200]: Failed password for ubuntu from 185.234.218.4 port 41006 ssh2
+May 20 08:00:13 webserver sshd[1200]: Failed password for ubuntu from 185.234.218.4 port 41007 ssh2
+May 20 08:00:15 webserver sshd[1200]: Failed password for oracle from 185.234.218.4 port 41008 ssh2
+May 20 08:00:17 webserver sshd[1200]: Failed password for postgres from 185.234.218.4 port 41009 ssh2
+May 20 08:00:19 webserver sshd[1200]: Failed password for deploy from 185.234.218.4 port 41010 ssh2
+May 20 08:00:21 webserver sshd[1200]: Failed password for test from 185.234.218.4 port 41011 ssh2
+May 20 08:00:23 webserver sshd[1200]: Failed password for git from 185.234.218.4 port 41012 ssh2
+May 20 08:00:25 webserver sshd[1200]: Failed password for www-data from 185.234.218.4 port 41013 ssh2
+May 20 08:00:27 webserver sshd[1200]: Failed password for pi from 185.234.218.4 port 41014 ssh2
+May 20 08:00:29 webserver sshd[1200]: Failed password for mysql from 185.234.218.4 port 41015 ssh2
+May 20 08:00:31 webserver sshd[1200]: Failed password for ftp from 185.234.218.4 port 41016 ssh2
+May 20 08:00:33 webserver sshd[1200]: Failed password for anonymous from 185.234.218.4 port 41017 ssh2
+May 20 08:00:35 webserver sshd[1200]: Failed password for support from 185.234.218.4 port 41018 ssh2
+May 20 08:00:37 webserver sshd[1200]: Failed password for user from 185.234.218.4 port 41019 ssh2
+May 20 08:00:39 webserver sshd[1200]: Failed password for nagios from 185.234.218.4 port 41020 ssh2
+May 20 08:00:41 webserver sshd[1200]: Failed password for guest from 185.234.218.4 port 41021 ssh2
+May 20 08:00:43 webserver sshd[1200]: Failed password for backup from 185.234.218.4 port 41022 ssh2
+May 20 08:00:45 webserver sshd[1200]: Failed password for jenkins from 185.234.218.4 port 41023 ssh2
+May 20 08:00:47 webserver sshd[1200]: Failed password for ansible from 185.234.218.4 port 41024 ssh2
+May 20 08:00:49 webserver sshd[1200]: Failed password for vagrant from 185.234.218.4 port 41025 ssh2
+May 20 08:00:51 webserver sshd[1200]: Failed password for hadoop from 185.234.218.4 port 41026 ssh2
+May 20 08:00:53 webserver sshd[1200]: Failed password for elasticsearch from 185.234.218.4 port 41027 ssh2
+May 20 08:00:55 webserver sshd[1200]: Failed password for redis from 185.234.218.4 port 41028 ssh2
+May 20 08:00:57 webserver sshd[1200]: Failed password for kafka from 185.234.218.4 port 41029 ssh2
+May 20 08:00:59 webserver sshd[1200]: Failed password for zabbix from 185.234.218.4 port 41030 ssh2
+May 20 08:01:01 webserver sshd[1200]: Failed password for root from 185.234.218.4 port 41031 ssh2
+May 20 08:01:03 webserver sshd[1200]: Failed password for root from 185.234.218.4 port 41032 ssh2
+May 20 08:01:05 webserver sshd[1200]: Failed password for admin from 185.234.218.4 port 41033 ssh2
+May 20 08:01:07 webserver sshd[1200]: Failed password for ubuntu from 185.234.218.4 port 41034 ssh2
+May 20 08:01:09 webserver sshd[1200]: Failed password for test from 185.234.218.4 port 41035 ssh2
+May 20 08:05:00 webserver sshd[1300]: Failed password for root from 91.201.67.133 port 22101 ssh2
+May 20 08:05:02 webserver sshd[1300]: Failed password for admin from 91.201.67.133 port 22102 ssh2
+May 20 08:05:04 webserver sshd[1300]: Failed password for admin from 91.201.67.133 port 22103 ssh2
+May 20 08:05:06 webserver sshd[1300]: Failed password for root from 91.201.67.133 port 22104 ssh2
+May 20 08:05:08 webserver sshd[1300]: Failed password for ubuntu from 91.201.67.133 port 22105 ssh2
+May 20 08:05:10 webserver sshd[1300]: Failed password for root from 91.201.67.133 port 22106 ssh2
+May 20 08:05:12 webserver sshd[1300]: Failed password for deploy from 91.201.67.133 port 22107 ssh2
+May 20 08:05:14 webserver sshd[1300]: Failed password for test from 91.201.67.133 port 22108 ssh2
+May 20 08:05:16 webserver sshd[1300]: Failed password for git from 91.201.67.133 port 22109 ssh2
+May 20 08:05:18 webserver sshd[1300]: Failed password for www-data from 91.201.67.133 port 22110 ssh2
+May 20 08:05:20 webserver sshd[1300]: Failed password for ftp from 91.201.67.133 port 22111 ssh2
+May 20 08:05:22 webserver sshd[1300]: Failed password for oracle from 91.201.67.133 port 22112 ssh2
+May 20 08:10:00 webserver sshd[1400]: Invalid user deploy from 45.33.32.156 port 33001
+May 20 08:10:02 webserver sshd[1400]: Failed password for invalid user deploy from 45.33.32.156 port 33001 ssh2
+May 20 08:10:04 webserver sshd[1400]: Invalid user test from 45.33.32.156 port 33002
+May 20 08:10:06 webserver sshd[1400]: Failed password for invalid user test from 45.33.32.156 port 33002 ssh2
+May 20 08:10:08 webserver sshd[1400]: Invalid user tomcat from 45.33.32.156 port 33003
+May 20 08:10:10 webserver sshd[1400]: Failed password for invalid user tomcat from 45.33.32.156 port 33003 ssh2
+May 20 08:15:00 webserver sshd[1500]: Accepted password for admin from 10.0.0.5 port 60200 ssh2
+May 20 08:15:01 webserver sshd[1500]: pam_unix(sshd:session): session opened for user admin by (uid=0)
+May 20 08:16:00 webserver sudo: admin : TTY=pts/0 ; PWD=/home/admin ; USER=root ; COMMAND=/bin/systemctl status nginx
+May 20 08:17:30 webserver sudo: admin : TTY=pts/0 ; PWD=/home/admin ; USER=root ; COMMAND=/bin/systemctl restart nginx
+May 20 08:20:00 webserver sshd[1600]: Accepted publickey for deploy from 10.10.10.20 port 55001 ssh2
+May 20 08:20:01 webserver sshd[1600]: pam_unix(sshd:session): session opened for user deploy by (uid=0)
+May 20 08:21:00 webserver sudo: deploy : TTY=pts/1 ; PWD=/var/www ; USER=root ; COMMAND=/usr/bin/rsync -a /var/www/html/ /mnt/backup/
+May 20 08:30:00 webserver sshd[1700]: Failed password for root from 77.88.55.10 port 12201 ssh2
+May 20 08:30:02 webserver sshd[1700]: Failed password for admin from 77.88.55.10 port 12202 ssh2
+May 20 08:30:04 webserver sshd[1700]: Failed password for root from 77.88.55.10 port 12203 ssh2
+May 20 09:00:00 webserver sshd[1800]: Accepted password for admin from 192.168.100.1 port 60300 ssh2
+May 20 09:00:01 webserver sshd[1800]: pam_unix(sshd:session): session opened for user admin by (uid=0)
+May 20 09:05:00 webserver sshd[1800]: pam_unix(sshd:session): session closed for user admin
+May 20 09:10:00 webserver sshd[1900]: Failed password for root from 185.234.218.4 port 41036 ssh2
+May 20 09:10:02 webserver sshd[1900]: Failed password for root from 185.234.218.4 port 41037 ssh2
+May 20 09:10:04 webserver sshd[1900]: Failed password for admin from 185.234.218.4 port 41038 ssh2
+May 20 09:10:06 webserver sshd[1900]: Failed password for ubuntu from 185.234.218.4 port 41039 ssh2
+May 20 09:10:08 webserver sshd[1900]: Failed password for root from 185.234.218.4 port 41040 ssh2
+May 20 09:30:00 webserver sshd[2000]: Accepted password for admin from 10.0.0.5 port 60400 ssh2
+May 20 09:30:01 webserver sshd[2000]: pam_unix(sshd:session): session opened for user admin by (uid=0)
+May 20 09:45:00 webserver sshd[2000]: pam_unix(sshd:session): session closed for user admin
+May 20 10:00:00 webserver sshd[2100]: Failed password for root from 91.201.67.133 port 22113 ssh2
+May 20 10:00:02 webserver sshd[2100]: Failed password for admin from 91.201.67.133 port 22114 ssh2
+May 20 10:10:00 webserver sshd[2200]: Accepted publickey for admin from 10.0.0.5 port 60500 ssh2
+May 20 10:10:01 webserver sshd[2200]: pam_unix(sshd:session): session opened for user admin by (uid=0)
+May 20 10:12:00 webserver sudo: admin : TTY=pts/0 ; PWD=/etc ; USER=root ; COMMAND=/bin/cat /var/log/syslog
+May 20 10:15:00 webserver sshd[2200]: pam_unix(sshd:session): session closed for user admin
+May 20 10:20:00 webserver sshd[2300]: Failed password for root from 77.88.55.10 port 12204 ssh2
+May 20 10:25:00 webserver sshd[2400]: Accepted password for deploy from 10.10.10.20 port 55010 ssh2
+May 20 10:25:01 webserver sshd[2400]: pam_unix(sshd:session): session opened for user deploy by (uid=0)
+May 20 10:30:00 webserver sudo: deploy : TTY=pts/2 ; PWD=/var/www/html ; USER=root ; COMMAND=/usr/bin/git pull
+May 20 10:45:00 webserver sshd[2400]: pam_unix(sshd:session): session closed for user deploy
+May 20 11:00:00 webserver sshd[2500]: Failed password for invalid user ubuntu from 45.33.32.156 port 33004 ssh2
+May 20 11:00:02 webserver sshd[2500]: Failed password for root from 185.234.218.4 port 41041 ssh2
+May 20 11:00:04 webserver sshd[2500]: Failed password for admin from 185.234.218.4 port 41042 ssh2
+May 20 11:00:06 webserver sshd[2500]: Failed password for ubuntu from 185.234.218.4 port 41043 ssh2
+May 20 11:00:08 webserver sshd[2500]: Failed password for root from 185.234.218.4 port 41044 ssh2
+May 20 11:00:10 webserver sshd[2500]: Failed password for root from 185.234.218.4 port 41045 ssh2
+May 20 11:15:00 webserver sshd[2600]: Accepted password for admin from 192.168.100.1 port 60600 ssh2
+May 20 11:15:01 webserver sshd[2600]: pam_unix(sshd:session): session opened for user admin by (uid=0)
+May 20 11:20:00 webserver sudo: admin : TTY=pts/0 ; PWD=/home/admin ; USER=root ; COMMAND=/bin/journalctl -n 100
+May 20 11:30:00 webserver sshd[2600]: pam_unix(sshd:session): session closed for user admin
+May 20 11:45:00 webserver sshd[2700]: Failed password for root from 91.201.67.133 port 22115 ssh2
+May 20 11:45:02 webserver sshd[2700]: Failed password for root from 91.201.67.133 port 22116 ssh2
+May 20 12:00:00 webserver sshd[2800]: Accepted password for admin from 10.0.0.5 port 60700 ssh2

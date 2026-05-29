@@ -1,0 +1,20 @@
+# Log Incident Analyzer — detection thresholds
+# Adjust these values to match your environment's traffic baseline.
+
+ssh_brute_force:
+  min_attempts: 10        # fewer than this → not reported
+  medium_threshold: 30    # > min and <= this → Medium severity, score 30
+  high_threshold: 100     # > medium and <= this → High severity, score 55
+  # > high_threshold → Critical severity, score 90
+
+web_scanning:
+  min_404_count: 30       # fewer than this → not reported
+  high_threshold: 80      # > this → High severity, score 55; otherwise Medium, score 25
+
+repeated_auth_errors:
+  min_count: 20           # fewer than this → not reported
+  high_threshold: 50      # > this → High severity, score 45; otherwise Medium, score 20
+
+scoring:
+  multi_indicator_bonus: 20   # added when an IP triggers more than one finding type
+  max_score: 100

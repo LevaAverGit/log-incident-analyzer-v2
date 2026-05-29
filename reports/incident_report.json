@@ -1,0 +1,380 @@
+{
+  "generated_at": "2026-05-24T12:11:42.501293",
+  "summary": {
+    "source": "sample_logs/auth.log, sample_logs/nginx_access.log, sample_logs/syslog",
+    "total_events": 229,
+    "parsing_errors": 0,
+    "total_findings": 9,
+    "total_incidents": 5
+  },
+  "incidents": [
+    {
+      "incident_id": "INC-001",
+      "source_ip": "185.199.109.10",
+      "severity": "Critical",
+      "total_score": 100,
+      "finding_types": [
+        "sensitive_path_access",
+        "suspicious_user_agent",
+        "web_scanning"
+      ],
+      "summary": "Multiple suspicious indicators from 185.199.109.10: sensitive path access, automated scanner and web directory scanning.",
+      "evidence": [
+        "404 count: 31",
+        "Sample paths: /docker-compose.yml, /api/v1/status, /wp-includes/, /debug, /.env",
+        "Paths accessed: /login, /backup/, /admin/, /phpinfo.php, /phpmyadmin/, /server-status, /config/, /actuator/env",
+        "User-agents: Nikto/2.1.6",
+        "Request count: 36"
+      ],
+      "recommendations": [
+        "Suspicious scanning pattern — verify manually. If confirmed: rate-limit or block IP in WAF, review access logs for successful resource discovery.",
+        "Review whether sensitive paths return 403/404. Check if any config or credentials were exposed. Manual triage required.",
+        "Automated scanner detected — correlate with sensitive path hits and 4xx responses. Block after manual confirmation."
+      ],
+      "first_seen": "20/May/2026:08:01:00 +0000",
+      "last_seen": "20/May/2026:08:01:35 +0000"
+    },
+    {
+      "incident_id": "INC-002",
+      "source_ip": "198.51.100.99",
+      "severity": "Critical",
+      "total_score": 95,
+      "finding_types": [
+        "repeated_auth_errors",
+        "sensitive_path_access",
+        "suspicious_user_agent"
+      ],
+      "summary": "Multiple suspicious indicators from 198.51.100.99: repeated 401/403 errors, sensitive path access and automated scanner.",
+      "evidence": [
+        "Paths accessed: /admin/users, /login, /admin/login, /phpinfo.php, /phpmyadmin/, /login?id=1%27, /.env, /admin/",
+        "User-agents: sqlmap/1.7.8#stable",
+        "Request count: 31",
+        "Total 401/403 responses: 23"
+      ],
+      "recommendations": [
+        "Review whether sensitive paths return 403/404. Check if any config or credentials were exposed. Manual triage required.",
+        "Automated scanner detected — correlate with sensitive path hits and 4xx responses. Block after manual confirmation.",
+        "Review authentication logs. Consider IP block if pattern continues."
+      ],
+      "first_seen": "20/May/2026:08:03:00 +0000",
+      "last_seen": "20/May/2026:08:03:30 +0000"
+    },
+    {
+      "incident_id": "INC-003",
+      "source_ip": "185.234.218.4",
+      "severity": "High",
+      "total_score": 55,
+      "finding_types": [
+        "ssh_brute_force"
+      ],
+      "summary": "Ssh brute force detected from 185.234.218.4.",
+      "evidence": [
+        "Total failed attempts: 45",
+        "Targeted usernames: backup, ubuntu, test, postgres, user, kafka, zabbix, www-data, mysql, admin"
+      ],
+      "recommendations": [
+        "Potential brute-force pattern — verify manually. If confirmed: block IP at firewall, review successful logins in the same window, consider fail2ban."
+      ],
+      "first_seen": "May 20 08:00:01",
+      "last_seen": "May 20 11:00:10"
+    },
+    {
+      "incident_id": "INC-004",
+      "source_ip": "91.201.67.133",
+      "severity": "Medium",
+      "total_score": 30,
+      "finding_types": [
+        "ssh_brute_force"
+      ],
+      "summary": "Ssh brute force detected from 91.201.67.133.",
+      "evidence": [
+        "Total failed attempts: 16",
+        "Targeted usernames: www-data, oracle, admin, test, ftp, deploy, root, ubuntu, git"
+      ],
+      "recommendations": [
+        "Potential brute-force pattern — verify manually. If confirmed: block IP at firewall, review successful logins in the same window, consider fail2ban."
+      ],
+      "first_seen": "May 20 08:05:00",
+      "last_seen": "May 20 11:45:02"
+    },
+    {
+      "incident_id": "INC-005",
+      "source_ip": "10.0.0.5",
+      "severity": "Low",
+      "total_score": 15,
+      "finding_types": [
+        "sensitive_path_access"
+      ],
+      "summary": "Sensitive path access detected from 10.0.0.5.",
+      "evidence": [
+        "Paths accessed: /admin"
+      ],
+      "recommendations": [
+        "Review whether sensitive paths return 403/404. Check if any config or credentials were exposed. Manual triage required."
+      ],
+      "first_seen": "20/May/2026:09:00:00 +0000",
+      "last_seen": "20/May/2026:09:00:00 +0000"
+    }
+  ],
+  "findings": [
+    {
+      "finding_type": "ssh_brute_force",
+      "source_ip": "185.234.218.4",
+      "severity": "High",
+      "score": 55,
+      "description": "Potential SSH brute-force pattern: 45 failed login attempts from 185.234.218.4",
+      "evidence": [
+        "Total failed attempts: 45",
+        "Targeted usernames: backup, ubuntu, test, postgres, user, kafka, zabbix, www-data, mysql, admin"
+      ],
+      "recommendation": "Potential brute-force pattern — verify manually. If confirmed: block IP at firewall, review successful logins in the same window, consider fail2ban.",
+      "related_events_count": 45,
+      "first_seen": "May 20 08:00:01",
+      "last_seen": "May 20 11:00:10"
+    },
+    {
+      "finding_type": "ssh_brute_force",
+      "source_ip": "91.201.67.133",
+      "severity": "Medium",
+      "score": 30,
+      "description": "Potential SSH brute-force pattern: 16 failed login attempts from 91.201.67.133",
+      "evidence": [
+        "Total failed attempts: 16",
+        "Targeted usernames: www-data, oracle, admin, test, ftp, deploy, root, ubuntu, git"
+      ],
+      "recommendation": "Potential brute-force pattern — verify manually. If confirmed: block IP at firewall, review successful logins in the same window, consider fail2ban.",
+      "related_events_count": 16,
+      "first_seen": "May 20 08:05:00",
+      "last_seen": "May 20 11:45:02"
+    },
+    {
+      "finding_type": "web_scanning",
+      "source_ip": "185.199.109.10",
+      "severity": "Medium",
+      "score": 25,
+      "description": "Possible web directory scanning: 31 HTTP 404 responses from 185.199.109.10",
+      "evidence": [
+        "404 count: 31",
+        "Sample paths: /docker-compose.yml, /api/v1/status, /wp-includes/, /debug, /.env"
+      ],
+      "recommendation": "Suspicious scanning pattern — verify manually. If confirmed: rate-limit or block IP in WAF, review access logs for successful resource discovery.",
+      "related_events_count": 31,
+      "first_seen": "20/May/2026:08:01:02 +0000",
+      "last_seen": "20/May/2026:08:01:35 +0000"
+    },
+    {
+      "finding_type": "sensitive_path_access",
+      "source_ip": "185.199.109.10",
+      "severity": "High",
+      "score": 35,
+      "description": "Access to 12 sensitive endpoint(s) from 185.199.109.10",
+      "evidence": [
+        "Paths accessed: /login, /backup/, /admin/, /phpinfo.php, /phpmyadmin/, /server-status, /config/, /actuator/env"
+      ],
+      "recommendation": "Review whether sensitive paths return 403/404. Check if any config or credentials were exposed. Manual triage required.",
+      "related_events_count": 12,
+      "first_seen": "20/May/2026:08:01:00 +0000",
+      "last_seen": "20/May/2026:08:01:19 +0000"
+    },
+    {
+      "finding_type": "sensitive_path_access",
+      "source_ip": "198.51.100.99",
+      "severity": "High",
+      "score": 35,
+      "description": "Access to 11 sensitive endpoint(s) from 198.51.100.99",
+      "evidence": [
+        "Paths accessed: /admin/users, /login, /admin/login, /phpinfo.php, /phpmyadmin/, /login?id=1%27, /.env, /admin/"
+      ],
+      "recommendation": "Review whether sensitive paths return 403/404. Check if any config or credentials were exposed. Manual triage required.",
+      "related_events_count": 11,
+      "first_seen": "20/May/2026:08:03:00 +0000",
+      "last_seen": "20/May/2026:08:03:22 +0000"
+    },
+    {
+      "finding_type": "sensitive_path_access",
+      "source_ip": "10.0.0.5",
+      "severity": "Medium",
+      "score": 15,
+      "description": "Access to 1 sensitive endpoint(s) from 10.0.0.5",
+      "evidence": [
+        "Paths accessed: /admin"
+      ],
+      "recommendation": "Review whether sensitive paths return 403/404. Check if any config or credentials were exposed. Manual triage required.",
+      "related_events_count": 1,
+      "first_seen": "20/May/2026:09:00:00 +0000",
+      "last_seen": "20/May/2026:09:00:00 +0000"
+    },
+    {
+      "finding_type": "suspicious_user_agent",
+      "source_ip": "185.199.109.10",
+      "severity": "Medium",
+      "score": 20,
+      "description": "Possible automated security scanner activity from 185.199.109.10",
+      "evidence": [
+        "User-agents: Nikto/2.1.6",
+        "Request count: 36"
+      ],
+      "recommendation": "Automated scanner detected — correlate with sensitive path hits and 4xx responses. Block after manual confirmation.",
+      "related_events_count": 36,
+      "first_seen": "20/May/2026:08:01:00 +0000",
+      "last_seen": "20/May/2026:08:01:35 +0000"
+    },
+    {
+      "finding_type": "suspicious_user_agent",
+      "source_ip": "198.51.100.99",
+      "severity": "Medium",
+      "score": 20,
+      "description": "Possible automated security scanner activity from 198.51.100.99",
+      "evidence": [
+        "User-agents: sqlmap/1.7.8#stable",
+        "Request count: 31"
+      ],
+      "recommendation": "Automated scanner detected — correlate with sensitive path hits and 4xx responses. Block after manual confirmation.",
+      "related_events_count": 31,
+      "first_seen": "20/May/2026:08:03:00 +0000",
+      "last_seen": "20/May/2026:08:03:30 +0000"
+    },
+    {
+      "finding_type": "repeated_auth_errors",
+      "source_ip": "198.51.100.99",
+      "severity": "Medium",
+      "score": 20,
+      "description": "Repeated 401/403 responses (23) from 198.51.100.99 — possible credential stuffing or forced browsing pattern",
+      "evidence": [
+        "Total 401/403 responses: 23"
+      ],
+      "recommendation": "Review authentication logs. Consider IP block if pattern continues.",
+      "related_events_count": 23,
+      "first_seen": "20/May/2026:08:03:06 +0000",
+      "last_seen": "20/May/2026:08:03:30 +0000"
+    }
+  ],
+  "timeline": [
+    {
+      "timestamp": "20/May/2026:08:01:00 +0000",
+      "source_ip": "185.199.109.10",
+      "event_type": "sensitive_path_access",
+      "short_description": "Access to 12 sensitive endpoint(s) from 185.199.109.10",
+      "severity": "High"
+    },
+    {
+      "timestamp": "20/May/2026:08:01:00 +0000",
+      "source_ip": "185.199.109.10",
+      "event_type": "suspicious_user_agent",
+      "short_description": "Possible automated security scanner activity from 185.199.109.10",
+      "severity": "Medium"
+    },
+    {
+      "timestamp": "20/May/2026:08:01:02 +0000",
+      "source_ip": "185.199.109.10",
+      "event_type": "web_scanning",
+      "short_description": "Possible web directory scanning: 31 HTTP 404 responses from 185.199.109.10",
+      "severity": "Medium"
+    },
+    {
+      "timestamp": "20/May/2026:08:01:19 +0000",
+      "source_ip": "185.199.109.10",
+      "event_type": "sensitive_path_access_end",
+      "short_description": "Last activity: Access to 12 sensitive endpoint(s) from 185.199.109.10",
+      "severity": "High"
+    },
+    {
+      "timestamp": "20/May/2026:08:01:35 +0000",
+      "source_ip": "185.199.109.10",
+      "event_type": "web_scanning_end",
+      "short_description": "Last activity: Possible web directory scanning: 31 HTTP 404 responses from ",
+      "severity": "Medium"
+    },
+    {
+      "timestamp": "20/May/2026:08:01:35 +0000",
+      "source_ip": "185.199.109.10",
+      "event_type": "suspicious_user_agent_end",
+      "short_description": "Last activity: Possible automated security scanner activity from 185.199.10",
+      "severity": "Medium"
+    },
+    {
+      "timestamp": "20/May/2026:08:03:00 +0000",
+      "source_ip": "198.51.100.99",
+      "event_type": "sensitive_path_access",
+      "short_description": "Access to 11 sensitive endpoint(s) from 198.51.100.99",
+      "severity": "High"
+    },
+    {
+      "timestamp": "20/May/2026:08:03:00 +0000",
+      "source_ip": "198.51.100.99",
+      "event_type": "suspicious_user_agent",
+      "short_description": "Possible automated security scanner activity from 198.51.100.99",
+      "severity": "Medium"
+    },
+    {
+      "timestamp": "20/May/2026:08:03:06 +0000",
+      "source_ip": "198.51.100.99",
+      "event_type": "repeated_auth_errors",
+      "short_description": "Repeated 401/403 responses (23) from 198.51.100.99 — possible credential stuffin",
+      "severity": "Medium"
+    },
+    {
+      "timestamp": "20/May/2026:08:03:22 +0000",
+      "source_ip": "198.51.100.99",
+      "event_type": "sensitive_path_access_end",
+      "short_description": "Last activity: Access to 11 sensitive endpoint(s) from 198.51.100.99",
+      "severity": "High"
+    },
+    {
+      "timestamp": "20/May/2026:08:03:30 +0000",
+      "source_ip": "198.51.100.99",
+      "event_type": "suspicious_user_agent_end",
+      "short_description": "Last activity: Possible automated security scanner activity from 198.51.100",
+      "severity": "Medium"
+    },
+    {
+      "timestamp": "20/May/2026:08:03:30 +0000",
+      "source_ip": "198.51.100.99",
+      "event_type": "repeated_auth_errors_end",
+      "short_description": "Last activity: Repeated 401/403 responses (23) from 198.51.100.99 — possibl",
+      "severity": "Medium"
+    },
+    {
+      "timestamp": "20/May/2026:09:00:00 +0000",
+      "source_ip": "10.0.0.5",
+      "event_type": "sensitive_path_access",
+      "short_description": "Access to 1 sensitive endpoint(s) from 10.0.0.5",
+      "severity": "Medium"
+    },
+    {
+      "timestamp": "May 20 08:00:01",
+      "source_ip": "185.234.218.4",
+      "event_type": "ssh_brute_force",
+      "short_description": "Potential SSH brute-force pattern: 45 failed login attempts from 185.234.218.4",
+      "severity": "High"
+    },
+    {
+      "timestamp": "May 20 08:05:00",
+      "source_ip": "91.201.67.133",
+      "event_type": "ssh_brute_force",
+      "short_description": "Potential SSH brute-force pattern: 16 failed login attempts from 91.201.67.133",
+      "severity": "Medium"
+    },
+    {
+      "timestamp": "May 20 11:00:10",
+      "source_ip": "185.234.218.4",
+      "event_type": "ssh_brute_force_end",
+      "short_description": "Last activity: Potential SSH brute-force pattern: 45 failed login attempts ",
+      "severity": "High"
+    },
+    {
+      "timestamp": "May 20 11:45:02",
+      "source_ip": "91.201.67.133",
+      "event_type": "ssh_brute_force_end",
+      "short_description": "Last activity: Potential SSH brute-force pattern: 16 failed login attempts ",
+      "severity": "Medium"
+    }
+  ],
+  "limitations": [
+    "Rules-based detection only — tuned for sample data, not a production ruleset.",
+    "Does not replace SIEM/EDR/SOC platforms.",
+    "Cannot perform attribution or confirm compromise automatically.",
+    "Findings require manual triage before any remediation action.",
+    "This is an educational MVP project."
+  ]
+}
