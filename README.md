@@ -1,6 +1,6 @@
 # Log Incident Analyzer
 
-[![CI](https://github.com/LevaAverGit/Log-incident-analyzer/actions/workflows/ci.yml/badge.svg)](https://github.com/LevaAverGit/Log-incident-analyzer/actions/workflows/ci.yml)
+[![CI](https://github.com/LevaAverGit/log-incident-analyzer-v2/actions/workflows/ci.yml/badge.svg)](https://github.com/LevaAverGit/log-incident-analyzer-v2/actions/workflows/ci.yml)
 
 Python CLI tool for rule-based analysis of Linux auth logs, Nginx access logs, and syslog. Parses raw logs, detects suspicious patterns, groups findings into incidents by source IP, assigns severity scores, builds a timeline, and generates Markdown and JSON reports.
 
