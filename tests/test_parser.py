@@ -82,3 +82,22 @@ def test_syslog_parsed():
     assert len(events) > 5
     errors = [e for e in events if e.event_type == "syslog_error"]
     assert len(errors) > 0
+
+
+def test_nginx_common_log_format_parsed():
+    # Common log format has no "referer" "user-agent" tail — it must still parse
+    # (and not be counted as an error), with user_agent left as None.
+    import tempfile, os
+    line = '203.0.113.7 - - [10/Jan/2026:08:00:01 +0000] "GET /index.html HTTP/1.1" 200 512\n'
+    with tempfile.NamedTemporaryFile(mode="w", suffix=".log", delete=False) as f:
+        f.write(line)
+        fname = f.name
+    try:
+        events, errors = parse_nginx_log(fname)
+        assert errors == 0
+        assert len(events) == 1
+        assert events[0].source_ip == "203.0.113.7"
+        assert events[0].status_code == 200
+        assert events[0].user_agent is None
+    finally:
+        os.unlink(fname)

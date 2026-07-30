@@ -9,8 +9,11 @@ from .models import ParsedEvent
 AUTH_LOG_RE = re.compile(
     r'^(\w{3}\s+\d+\s+\d+:\d+:\d+)\s+(\S+)\s+(\S+?)(?:\[(\d+)\])?:\s+(.+)$'
 )
+# Accepts both the combined log format (with "referer" "user-agent") and the
+# common log format (without them). The trailing referer/UA group is optional so
+# that plain common-format access logs parse instead of being counted as errors.
 NGINX_RE = re.compile(
-    r'^(\S+)\s+-\s+-\s+\[([^\]]+)\]\s+"(\S+)\s+(\S+)\s+\S+"\s+(\d+)\s+(\d+)\s+"[^"]*"\s+"([^"]*)"'
+    r'^(\S+)\s+-\s+-\s+\[([^\]]+)\]\s+"(\S+)\s+(\S+)\s+\S+"\s+(\d+)\s+(\d+)(?:\s+"[^"]*"\s+"([^"]*)")?'
 )
 SYSLOG_RE = re.compile(
     r'^(\w{3}\s+\d+\s+\d+:\d+:\d+)\s+(\S+)\s+(\S+?)(?:\[(\d+)\])?:\s+(.+)$'
