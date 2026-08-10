@@ -101,3 +101,25 @@ def test_nginx_common_log_format_parsed():
         assert events[0].user_agent is None
     finally:
         os.unlink(fname)
+
+
+def test_nginx_dash_body_size_parsed():
+    # nginx logs "-" for the body-bytes field when the response has no body
+    # (e.g. 304 Not Modified). Such lines must still parse, not count as errors,
+    # in both common and combined formats.
+    import tempfile, os
+    content = (
+        '203.0.113.7 - - [10/Jan/2026:08:00:01 +0000] "GET /a.html HTTP/1.1" 304 -\n'
+        '203.0.113.8 - - [10/Jan/2026:08:00:02 +0000] "GET /b.html HTTP/1.1" 304 - "-" "Mozilla/5.0"\n'
+    )
+    with tempfile.NamedTemporaryFile(mode="w", suffix=".log", delete=False) as f:
+        f.write(content)
+        fname = f.name
+    try:
+        events, errors = parse_nginx_log(fname)
+        assert errors == 0
+        assert len(events) == 2
+        assert events[0].status_code == 304
+        assert events[1].user_agent == "Mozilla/5.0"
+    finally:
+        os.unlink(fname)
