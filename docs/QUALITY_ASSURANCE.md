@@ -2,7 +2,7 @@
 
 ## Test Strategy
 
-58 tests across 7 test files. All tests run without external files,
+60 tests across 7 test files. All tests run without external files,
 network access, or a running service.
 
 ```bash
@@ -29,7 +29,7 @@ make test
 
 ## Unit vs. Integration Tests
 
-**Unit tests (all 58):** Use synthetic `ParsedEvent` objects constructed inline.
+**Unit tests (all 60):** Use synthetic `ParsedEvent` objects constructed inline.
 No log files are read during test runs.
 
 **Integration tests (not implemented):** End-to-end run against `sample_logs/`.
@@ -96,7 +96,7 @@ def test_brute_force_medium():
 
 Before updating `reports/` with new example output:
 
-- [ ] `make test` passes with 58 passed, 0 failures
+- [ ] `make test` passes with 60 passed, 0 failures
 - [ ] `python3 main.py --all-samples --output reports/incident_report.md` completes
 - [ ] Report shows expected incident count (5 incidents for default sample logs)
 - [ ] `python3 main.py --all-samples --format json --output reports/incident_report.json`

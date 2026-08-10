@@ -22,7 +22,7 @@ Python CLI tool for rule-based analysis of Linux auth logs, Nginx access logs, a
   a +20 score bonus in incident grouping, surfacing correlated attack patterns
 - **Dual output format** — same data model serialised to both Markdown
   (structured incident report) and JSON (diffable, machine-readable)
-- **58 tests, 0 external dependencies in tests** — all detectors tested with inline
+- **60 tests, 0 external dependencies in tests** — all detectors tested with inline
   synthetic `ParsedEvent` objects; no log files required to run the test suite
 
 ## Detection Pipeline
@@ -91,7 +91,7 @@ raw logs → parsed events → findings → incident grouping → severity scori
 - Timeline of suspicious events sorted by timestamp
 - Markdown report with summary, incidents, timeline, recommendations, limitations
 - JSON report for downstream processing
-- `pytest` test suite — 58 tests
+- `pytest` test suite — 60 tests
 
 ---
 
@@ -204,7 +204,7 @@ $ python3 main.py --all-samples --format json --output reports/incident_report.j
 ```
 $ python3 -m pytest tests/ -v
 ...
-58 passed
+60 passed
 ```
 
 Summary from the generated report:
@@ -257,7 +257,7 @@ python3 -m pytest tests/ -v
 make test
 ```
 
-**58 tests passing.** All tests run without log files or external services —
+**60 tests passing.** All tests run without log files or external services —
 detectors are tested with synthetic `ParsedEvent` objects constructed inline.
 
 Coverage: `test_parser`, `test_detectors`, `test_scoring`, `test_incident_grouping`,
