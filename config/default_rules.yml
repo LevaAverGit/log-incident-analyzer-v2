@@ -13,7 +13,7 @@ web_scanning:
 
 repeated_auth_errors:
   min_count: 20           # fewer than this → not reported
-  high_threshold: 50      # > this → High severity, score 45; otherwise Medium, score 20
+  high_threshold: 50      # > this → Medium severity, score 45; otherwise Low, score 20
 
 scoring:
   multi_indicator_bonus: 20   # added when an IP triggers more than one finding type

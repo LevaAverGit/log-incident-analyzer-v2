@@ -146,29 +146,32 @@ grep -i "<tool_name>" /var/log/nginx/access.log | awk '{print $7, $9}' | sort | 
 
 ## repeated_auth_errors
 
-**What it means:** A source IP generated a high volume of authentication errors
-(invalid user, maximum auth attempts exceeded) beyond what normal user behavior produces.
+**What it means:** A source IP generated a high volume of HTTP 401/403 responses
+in the Nginx access log — possible credential stuffing against an app login, or
+forced browsing of protected paths. (Despite the name, this rule reads the Nginx
+access log, not `auth.log`.)
 
-**Step 1 — Distinguish from brute-force:**
-- `repeated_auth_errors` often occurs together with `ssh_brute_force` when
-  the attacker cycles through many non-existent usernames.
-- Check: is this IP also in `ssh_brute_force` findings?
-
-**Step 2 — Check auth error types:**
+**Step 1 — See which paths were blocked:**
 ```bash
-grep "<source_ip>" /var/log/auth.log | grep -E "Invalid user|maximum authentication" | head -20
+grep "<source_ip>" /var/log/nginx/access.log | awk '$9 ~ /401|403/ {print $7}' | sort | uniq -c | sort -rn
 ```
+- Many 401s against one login endpoint → credential stuffing.
+- 403s spread across many paths → forced browsing / authz probing.
 
-**Step 3 — Check for valid accounts targeted:**
-- If errors are all `Invalid user <random>`, it's a username enumeration attempt.
-- If errors are for real usernames (root, ubuntu), it's credential brute-force.
+**Step 2 — Check for a breakthrough:**
+- Look for any `200`/`302` to the same protected path after the 401/403 burst —
+  that would indicate a successful login or bypass.
+
+**Step 3 — Correlate with app logs:**
+- Pull the application's own auth logs for the same IP and window to confirm
+  whether any credential pair succeeded.
 
 **Contain:**
 - Block IP if still active. Add to deny list.
 
 **Escalate when:**
-- Valid username targeted repeatedly (different from random enumeration)
-- Combined with ssh_brute_force finding from the same IP
+- A 200/302 follows the 401/403 burst on a protected path
+- Combined with `ssh_brute_force` or `suspicious_user_agent` from the same IP
 
 ---
 

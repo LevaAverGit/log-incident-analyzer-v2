@@ -9,9 +9,10 @@ This guide walks through implementing a new detection rule from scratch.
 ```python
 from __future__ import annotations
 from collections import defaultdict
-from typing import Dict, Any, List, Optional
+from typing import Any, Dict, List, Optional
 
 from .models import Finding, ParsedEvent
+from .scoring import score_to_severity
 from .config import load_config
 
 
@@ -36,7 +37,10 @@ def detect_my_pattern(
         if cnt <= min_count:
             continue
 
-        score, sev = (45, "High") if cnt > high_threshold else (20, "Medium")
+        # Assign a score; derive severity from it via the shared scale so every
+        # rule maps score → severity the same way (see analyzer/scoring.py).
+        score = 55 if cnt > high_threshold else 35
+        sev = score_to_severity(score)
         first = next((e.timestamp for e in evs if e.timestamp), None)
         last = next((e.timestamp for e in reversed(evs) if e.timestamp), None)
 

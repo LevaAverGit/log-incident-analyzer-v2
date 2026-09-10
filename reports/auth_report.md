@@ -1,13 +1,13 @@
 # Log Incident Analysis Report
 
-_Generated: 2026-05-24 11:46:51_
+_Generated: 2026-09-11 02:13:17_
 
 ## Summary
 
 | Field | Value |
 |---|---|
 | Source | `sample_logs/auth.log` |
-| Total parsed events | 78 |
+| Total parsed events | 100 |
 | Parsing errors | 0 |
 | Total findings | 2 |
 | Total incidents | 2 |
@@ -30,14 +30,14 @@ _Generated: 2026-05-24 11:46:51_
 - **Finding types:** ssh_brute_force
 - **Summary:** Ssh brute force detected from 185.234.218.4.
 - **First seen:** `May 20 08:00:01`
-- **Last seen:** `May 20 09:10:08`
+- **Last seen:** `May 20 11:00:10`
 
 **Evidence:**
-- Total failed attempts: 40
-- Targeted usernames: oracle, postgres, ubuntu, admin, deploy, ftp, kafka, root, vagrant, guest
+- Total failed attempts: 45
+- Targeted usernames: www-data, mysql, vagrant, ftp, postgres, ubuntu, admin, user, guest, hadoop
 
 **Recommendations:**
-- Block IP in firewall. Review successful logins after attack window. Enable fail2ban.
+- Potential brute-force pattern — verify manually. If confirmed: block IP at firewall, review successful logins in the same window, consider fail2ban.
 
 ### INC-002 — `91.201.67.133`
 
@@ -46,23 +46,23 @@ _Generated: 2026-05-24 11:46:51_
 - **Finding types:** ssh_brute_force
 - **Summary:** Ssh brute force detected from 91.201.67.133.
 - **First seen:** `May 20 08:05:00`
-- **Last seen:** `May 20 10:00:02`
+- **Last seen:** `May 20 11:45:02`
 
 **Evidence:**
-- Total failed attempts: 14
-- Targeted usernames: oracle, root, ubuntu, admin, test, deploy, www-data, ftp, git
+- Total failed attempts: 16
+- Targeted usernames: admin, www-data, git, root, ftp, deploy, ubuntu, oracle, test
 
 **Recommendations:**
-- Block IP in firewall. Review successful logins after attack window. Enable fail2ban.
+- Potential brute-force pattern — verify manually. If confirmed: block IP at firewall, review successful logins in the same window, consider fail2ban.
 
 ## Timeline
 
 | Time | Source IP | Event Type | Severity | Description |
 |---|---|---|---|---|
-| `May 20 08:00:01` | `185.234.218.4` | ssh_brute_force | 🟠 High | SSH brute force: 40 failed login attempts from 185.234.218.4 |
-| `May 20 08:05:00` | `91.201.67.133` | ssh_brute_force | 🟡 Medium | SSH brute force: 14 failed login attempts from 91.201.67.133 |
-| `May 20 09:10:08` | `185.234.218.4` | ssh_brute_force_end | 🟠 High | Last activity: SSH brute force: 40 failed login attempts from 185.234.218.4 |
-| `May 20 10:00:02` | `91.201.67.133` | ssh_brute_force_end | 🟡 Medium | Last activity: SSH brute force: 14 failed login attempts from 91.201.67.133 |
+| `May 20 08:00:01` | `185.234.218.4` | ssh_brute_force | 🟠 High | Potential SSH brute-force pattern: 45 failed login attempts from 185.234.218.4 |
+| `May 20 08:05:00` | `91.201.67.133` | ssh_brute_force | 🟡 Medium | Potential SSH brute-force pattern: 16 failed login attempts from 91.201.67.133 |
+| `May 20 11:00:10` | `185.234.218.4` | ssh_brute_force_end | 🟠 High | Last activity: Potential SSH brute-force pattern: 45 failed login attempts  |
+| `May 20 11:45:02` | `91.201.67.133` | ssh_brute_force_end | 🟡 Medium | Last activity: Potential SSH brute-force pattern: 16 failed login attempts  |
 
 ## General Recommendations
 

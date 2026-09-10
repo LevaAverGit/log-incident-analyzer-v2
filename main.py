@@ -4,7 +4,7 @@
 import argparse
 import sys
 from pathlib import Path
-from typing import List
+from typing import List, Optional
 
 from analyzer.models import ParsedEvent
 from analyzer.parser import parse_auth_log, parse_nginx_log, parse_syslog
@@ -15,7 +15,8 @@ from analyzer.reporter import generate_markdown_report, generate_json_report, sa
 from analyzer.config import load_config
 
 
-def _load_events(auth: str = None, nginx: str = None, syslog: str = None):
+def _load_events(auth: Optional[str] = None, nginx: Optional[str] = None,
+                 syslog: Optional[str] = None):
     all_events: List[ParsedEvent] = []
     total_errors = 0
     sources = []

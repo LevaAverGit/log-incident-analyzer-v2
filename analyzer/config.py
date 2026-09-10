@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from pathlib import Path
-from typing import Any, Dict
+from typing import Any, Dict, Optional
 
 import yaml
 
@@ -28,7 +28,7 @@ _DEFAULT: Dict[str, Any] = {
 }
 
 
-def load_config(path: str = None) -> Dict[str, Any]:
+def load_config(path: Optional[str] = None) -> Dict[str, Any]:
     """Load YAML config. Falls back to built-in defaults if file is missing."""
     target = Path(path) if path else _DEFAULT_CONFIG_PATH
     if target.exists():

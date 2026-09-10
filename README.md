@@ -300,7 +300,7 @@ Findings are grouped into **Incidents** per source IP. If an IP triggers more th
 
 ## Limitations
 
-- Rules-based detection only — thresholds are fixed and tuned for sample data
+- Rules-based detection only — default thresholds are tuned for sample data
 - Not a replacement for SIEM or EDR
 - Does not confirm compromise automatically
 - No attribution — source IPs may be spoofed or belong to exit nodes
@@ -317,12 +317,12 @@ The included `sample_logs/` files are **synthetic and demo-scale** (~100 events 
 
 This tool has **not been tested on production-scale log files**. Real server logs can contain hundreds of thousands to millions of lines per day. The current implementation reads files fully into memory, which is adequate for small files but may not be suitable for large volumes without modification.
 
-Detection thresholds (e.g., brute-force trigger at >10 failed attempts) are fixed in code and calibrated for the sample data. In a real environment, appropriate thresholds depend on the server's traffic profile and should be configurable.
+Default detection thresholds (e.g., brute-force trigger at >10 failed attempts) are calibrated for the sample data. They live in `config/default_rules.yml` and can be overridden with `--config`, but appropriate values depend on the server's traffic profile and have not been tuned against real traffic.
 
 Key limitations to be aware of:
 - Not tested on logs larger than a few MB
 - Rule-based only — no statistical or ML-based anomaly detection
-- Thresholds are not configurable without code changes (planned for a future version)
+- Sensitive-path and scanner-UA lists are still hardcoded in `detectors.py`, not config-driven
 - Timestamps from different log sources are not correlated by time window
 - The tool is a learning and demonstration project — manual validation is required before acting on any output
 

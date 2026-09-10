@@ -1,6 +1,6 @@
 # Log Incident Analysis Report
 
-_Generated: 2026-05-24 12:11:42_
+_Generated: 2026-09-11 02:13:17_
 
 ## Summary
 
@@ -39,8 +39,8 @@ _Generated: 2026-05-24 12:11:42_
 
 **Evidence:**
 - 404 count: 31
-- Sample paths: /wp-config.php.bak, /api/v1/status, /Dockerfile, /config/, /.env
-- Paths accessed: /server-status, /config/, /admin/, /.env, /wp-login.php, /actuator/env, /.git/config, /debug
+- Sample paths: /backup/, /.env, /composer.json, /shell.php, /sitemap.xml
+- Paths accessed: /server-status, /backup/, /phpmyadmin/, /.git/config, /phpinfo.php, /.env, /actuator/env, /admin/
 - User-agents: Nikto/2.1.6
 - Request count: 36
 
@@ -59,7 +59,7 @@ _Generated: 2026-05-24 12:11:42_
 - **Last seen:** `20/May/2026:08:03:30 +0000`
 
 **Evidence:**
-- Paths accessed: /login?id=1+UNION+SELECT+NULL--, /admin/login, /.env, /admin/, /login?id=1+AND+1=2, /login?id=1+AND+1=1, /admin/users, /login?id=1%27
+- Paths accessed: /phpmyadmin/, /login?id=1+UNION+SELECT+NULL--, /login?id=1%27, /phpinfo.php, /admin/login, /login?id=1+AND+1=2, /login?id=1+AND+1=1, /.env
 - User-agents: sqlmap/1.7.8#stable
 - Request count: 31
 - Total 401/403 responses: 23
@@ -80,7 +80,7 @@ _Generated: 2026-05-24 12:11:42_
 
 **Evidence:**
 - Total failed attempts: 45
-- Targeted usernames: deploy, www-data, vagrant, mysql, postgres, kafka, jenkins, zabbix, git, user
+- Targeted usernames: support, ftp, vagrant, ansible, elasticsearch, www-data, backup, jenkins, guest, nagios
 
 **Recommendations:**
 - Potential brute-force pattern — verify manually. If confirmed: block IP at firewall, review successful logins in the same window, consider fail2ban.
@@ -96,7 +96,7 @@ _Generated: 2026-05-24 12:11:42_
 
 **Evidence:**
 - Total failed attempts: 16
-- Targeted usernames: test, root, ubuntu, admin, ftp, oracle, deploy, git, www-data
+- Targeted usernames: ubuntu, test, www-data, ftp, git, admin, deploy, root, oracle
 
 **Recommendations:**
 - Potential brute-force pattern — verify manually. If confirmed: block IP at firewall, review successful logins in the same window, consider fail2ban.
@@ -120,19 +120,19 @@ _Generated: 2026-05-24 12:11:42_
 
 | Time | Source IP | Event Type | Severity | Description |
 |---|---|---|---|---|
-| `20/May/2026:08:01:00 +0000` | `185.199.109.10` | sensitive_path_access | 🟠 High | Access to 12 sensitive endpoint(s) from 185.199.109.10 |
-| `20/May/2026:08:01:00 +0000` | `185.199.109.10` | suspicious_user_agent | 🟡 Medium | Possible automated security scanner activity from 185.199.109.10 |
+| `20/May/2026:08:01:00 +0000` | `185.199.109.10` | sensitive_path_access | 🟡 Medium | Access to 12 sensitive endpoint(s) from 185.199.109.10 |
+| `20/May/2026:08:01:00 +0000` | `185.199.109.10` | suspicious_user_agent | 🟢 Low | Possible automated security scanner activity from 185.199.109.10 |
 | `20/May/2026:08:01:02 +0000` | `185.199.109.10` | web_scanning | 🟡 Medium | Possible web directory scanning: 31 HTTP 404 responses from 185.199.109.10 |
-| `20/May/2026:08:01:19 +0000` | `185.199.109.10` | sensitive_path_access_end | 🟠 High | Last activity: Access to 12 sensitive endpoint(s) from 185.199.109.10 |
+| `20/May/2026:08:01:19 +0000` | `185.199.109.10` | sensitive_path_access_end | 🟡 Medium | Last activity: Access to 12 sensitive endpoint(s) from 185.199.109.10 |
 | `20/May/2026:08:01:35 +0000` | `185.199.109.10` | web_scanning_end | 🟡 Medium | Last activity: Possible web directory scanning: 31 HTTP 404 responses from  |
-| `20/May/2026:08:01:35 +0000` | `185.199.109.10` | suspicious_user_agent_end | 🟡 Medium | Last activity: Possible automated security scanner activity from 185.199.10 |
-| `20/May/2026:08:03:00 +0000` | `198.51.100.99` | sensitive_path_access | 🟠 High | Access to 11 sensitive endpoint(s) from 198.51.100.99 |
-| `20/May/2026:08:03:00 +0000` | `198.51.100.99` | suspicious_user_agent | 🟡 Medium | Possible automated security scanner activity from 198.51.100.99 |
-| `20/May/2026:08:03:06 +0000` | `198.51.100.99` | repeated_auth_errors | 🟡 Medium | Repeated 401/403 responses (23) from 198.51.100.99 — possible credential stuffin |
-| `20/May/2026:08:03:22 +0000` | `198.51.100.99` | sensitive_path_access_end | 🟠 High | Last activity: Access to 11 sensitive endpoint(s) from 198.51.100.99 |
-| `20/May/2026:08:03:30 +0000` | `198.51.100.99` | suspicious_user_agent_end | 🟡 Medium | Last activity: Possible automated security scanner activity from 198.51.100 |
-| `20/May/2026:08:03:30 +0000` | `198.51.100.99` | repeated_auth_errors_end | 🟡 Medium | Last activity: Repeated 401/403 responses (23) from 198.51.100.99 — possibl |
-| `20/May/2026:09:00:00 +0000` | `10.0.0.5` | sensitive_path_access | 🟡 Medium | Access to 1 sensitive endpoint(s) from 10.0.0.5 |
+| `20/May/2026:08:01:35 +0000` | `185.199.109.10` | suspicious_user_agent_end | 🟢 Low | Last activity: Possible automated security scanner activity from 185.199.10 |
+| `20/May/2026:08:03:00 +0000` | `198.51.100.99` | sensitive_path_access | 🟡 Medium | Access to 11 sensitive endpoint(s) from 198.51.100.99 |
+| `20/May/2026:08:03:00 +0000` | `198.51.100.99` | suspicious_user_agent | 🟢 Low | Possible automated security scanner activity from 198.51.100.99 |
+| `20/May/2026:08:03:06 +0000` | `198.51.100.99` | repeated_auth_errors | 🟢 Low | Repeated 401/403 responses (23) from 198.51.100.99 — possible credential stuffin |
+| `20/May/2026:08:03:22 +0000` | `198.51.100.99` | sensitive_path_access_end | 🟡 Medium | Last activity: Access to 11 sensitive endpoint(s) from 198.51.100.99 |
+| `20/May/2026:08:03:30 +0000` | `198.51.100.99` | suspicious_user_agent_end | 🟢 Low | Last activity: Possible automated security scanner activity from 198.51.100 |
+| `20/May/2026:08:03:30 +0000` | `198.51.100.99` | repeated_auth_errors_end | 🟢 Low | Last activity: Repeated 401/403 responses (23) from 198.51.100.99 — possibl |
+| `20/May/2026:09:00:00 +0000` | `10.0.0.5` | sensitive_path_access | 🟢 Low | Access to 1 sensitive endpoint(s) from 10.0.0.5 |
 | `May 20 08:00:01` | `185.234.218.4` | ssh_brute_force | 🟠 High | Potential SSH brute-force pattern: 45 failed login attempts from 185.234.218.4 |
 | `May 20 08:05:00` | `91.201.67.133` | ssh_brute_force | 🟡 Medium | Potential SSH brute-force pattern: 16 failed login attempts from 91.201.67.133 |
 | `May 20 11:00:10` | `185.234.218.4` | ssh_brute_force_end | 🟠 High | Last activity: Potential SSH brute-force pattern: 45 failed login attempts  |

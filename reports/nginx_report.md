@@ -1,13 +1,13 @@
 # Log Incident Analysis Report
 
-_Generated: 2026-05-24 11:46:51_
+_Generated: 2026-09-11 02:13:17_
 
 ## Summary
 
 | Field | Value |
 |---|---|
 | Source | `sample_logs/nginx_access.log` |
-| Total parsed events | 92 |
+| Total parsed events | 100 |
 | Parsing errors | 0 |
 | Total findings | 7 |
 | Total incidents | 3 |
@@ -35,15 +35,15 @@ _Generated: 2026-05-24 11:46:51_
 
 **Evidence:**
 - 404 count: 31
-- Sample paths: /wp-login.php, /wp-config.php.bak, /wp-content/, /wp-includes/, /sitemap.xml
-- Paths accessed: /wp-login.php, /.git/config, /backup/, /login, /phpinfo.php, /admin/, /server-status, /actuator/env
+- Sample paths: /shell.php, /composer.json, /backup/, /wp-config.php.bak, /api/v1/status
+- Paths accessed: /config/, /actuator/env, /server-status, /login, /.env, /phpmyadmin/, /backup/, /phpinfo.php
 - User-agents: Nikto/2.1.6
 - Request count: 36
 
 **Recommendations:**
-- Block/rate-limit IP in WAF. Review web server error logs for successful discovery.
-- Ensure sensitive paths are blocked (403/404). Review app config exposure.
-- Block scanner IP. Correlate with sensitive path hits.
+- Suspicious scanning pattern — verify manually. If confirmed: rate-limit or block IP in WAF, review access logs for successful resource discovery.
+- Review whether sensitive paths return 403/404. Check if any config or credentials were exposed. Manual triage required.
+- Automated scanner detected — correlate with sensitive path hits and 4xx responses. Block after manual confirmation.
 
 ### INC-002 — `198.51.100.99`
 
@@ -55,14 +55,14 @@ _Generated: 2026-05-24 11:46:51_
 - **Last seen:** `20/May/2026:08:03:30 +0000`
 
 **Evidence:**
-- Paths accessed: /admin/users, /login?id=1+UNION+SELECT+NULL--, /login, /admin/login, /login?id=1+AND+1=1, /admin/, /phpmyadmin/, /phpinfo.php
+- Paths accessed: /admin/users, /login?id=1+AND+1=2, /login, /.env, /phpmyadmin/, /login?id=1%27, /login?id=1+AND+1=1, /phpinfo.php
 - User-agents: sqlmap/1.7.8#stable
 - Request count: 31
 - Total 401/403 responses: 23
 
 **Recommendations:**
-- Ensure sensitive paths are blocked (403/404). Review app config exposure.
-- Block scanner IP. Correlate with sensitive path hits.
+- Review whether sensitive paths return 403/404. Check if any config or credentials were exposed. Manual triage required.
+- Automated scanner detected — correlate with sensitive path hits and 4xx responses. Block after manual confirmation.
 - Review authentication logs. Consider IP block if pattern continues.
 
 ### INC-003 — `10.0.0.5`
@@ -78,25 +78,25 @@ _Generated: 2026-05-24 11:46:51_
 - Paths accessed: /admin
 
 **Recommendations:**
-- Ensure sensitive paths are blocked (403/404). Review app config exposure.
+- Review whether sensitive paths return 403/404. Check if any config or credentials were exposed. Manual triage required.
 
 ## Timeline
 
 | Time | Source IP | Event Type | Severity | Description |
 |---|---|---|---|---|
-| `20/May/2026:08:01:00 +0000` | `185.199.109.10` | sensitive_path_access | 🟠 High | Access to 12 sensitive endpoint(s) from 185.199.109.10 |
-| `20/May/2026:08:01:00 +0000` | `185.199.109.10` | suspicious_user_agent | 🟡 Medium | Automated security scanner detected from 185.199.109.10 |
-| `20/May/2026:08:01:02 +0000` | `185.199.109.10` | web_scanning | 🟡 Medium | Web directory scanning: 31 HTTP 404 responses from 185.199.109.10 |
-| `20/May/2026:08:01:19 +0000` | `185.199.109.10` | sensitive_path_access_end | 🟠 High | Last activity: Access to 12 sensitive endpoint(s) from 185.199.109.10 |
-| `20/May/2026:08:01:35 +0000` | `185.199.109.10` | web_scanning_end | 🟡 Medium | Last activity: Web directory scanning: 31 HTTP 404 responses from 185.199.1 |
-| `20/May/2026:08:01:35 +0000` | `185.199.109.10` | suspicious_user_agent_end | 🟡 Medium | Last activity: Automated security scanner detected from 185.199.109.10 |
-| `20/May/2026:08:03:00 +0000` | `198.51.100.99` | sensitive_path_access | 🟠 High | Access to 11 sensitive endpoint(s) from 198.51.100.99 |
-| `20/May/2026:08:03:00 +0000` | `198.51.100.99` | suspicious_user_agent | 🟡 Medium | Automated security scanner detected from 198.51.100.99 |
-| `20/May/2026:08:03:06 +0000` | `198.51.100.99` | repeated_auth_errors | 🟡 Medium | Repeated 401/403 responses (23) from 198.51.100.99 — possible credential stuffin |
-| `20/May/2026:08:03:22 +0000` | `198.51.100.99` | sensitive_path_access_end | 🟠 High | Last activity: Access to 11 sensitive endpoint(s) from 198.51.100.99 |
-| `20/May/2026:08:03:30 +0000` | `198.51.100.99` | suspicious_user_agent_end | 🟡 Medium | Last activity: Automated security scanner detected from 198.51.100.99 |
-| `20/May/2026:08:03:30 +0000` | `198.51.100.99` | repeated_auth_errors_end | 🟡 Medium | Last activity: Repeated 401/403 responses (23) from 198.51.100.99 — possibl |
-| `20/May/2026:09:00:00 +0000` | `10.0.0.5` | sensitive_path_access | 🟡 Medium | Access to 1 sensitive endpoint(s) from 10.0.0.5 |
+| `20/May/2026:08:01:00 +0000` | `185.199.109.10` | sensitive_path_access | 🟡 Medium | Access to 12 sensitive endpoint(s) from 185.199.109.10 |
+| `20/May/2026:08:01:00 +0000` | `185.199.109.10` | suspicious_user_agent | 🟢 Low | Possible automated security scanner activity from 185.199.109.10 |
+| `20/May/2026:08:01:02 +0000` | `185.199.109.10` | web_scanning | 🟡 Medium | Possible web directory scanning: 31 HTTP 404 responses from 185.199.109.10 |
+| `20/May/2026:08:01:19 +0000` | `185.199.109.10` | sensitive_path_access_end | 🟡 Medium | Last activity: Access to 12 sensitive endpoint(s) from 185.199.109.10 |
+| `20/May/2026:08:01:35 +0000` | `185.199.109.10` | web_scanning_end | 🟡 Medium | Last activity: Possible web directory scanning: 31 HTTP 404 responses from  |
+| `20/May/2026:08:01:35 +0000` | `185.199.109.10` | suspicious_user_agent_end | 🟢 Low | Last activity: Possible automated security scanner activity from 185.199.10 |
+| `20/May/2026:08:03:00 +0000` | `198.51.100.99` | sensitive_path_access | 🟡 Medium | Access to 11 sensitive endpoint(s) from 198.51.100.99 |
+| `20/May/2026:08:03:00 +0000` | `198.51.100.99` | suspicious_user_agent | 🟢 Low | Possible automated security scanner activity from 198.51.100.99 |
+| `20/May/2026:08:03:06 +0000` | `198.51.100.99` | repeated_auth_errors | 🟢 Low | Repeated 401/403 responses (23) from 198.51.100.99 — possible credential stuffin |
+| `20/May/2026:08:03:22 +0000` | `198.51.100.99` | sensitive_path_access_end | 🟡 Medium | Last activity: Access to 11 sensitive endpoint(s) from 198.51.100.99 |
+| `20/May/2026:08:03:30 +0000` | `198.51.100.99` | suspicious_user_agent_end | 🟢 Low | Last activity: Possible automated security scanner activity from 198.51.100 |
+| `20/May/2026:08:03:30 +0000` | `198.51.100.99` | repeated_auth_errors_end | 🟢 Low | Last activity: Repeated 401/403 responses (23) from 198.51.100.99 — possibl |
+| `20/May/2026:09:00:00 +0000` | `10.0.0.5` | sensitive_path_access | 🟢 Low | Access to 1 sensitive endpoint(s) from 10.0.0.5 |
 
 ## General Recommendations
 

@@ -82,9 +82,9 @@ and prioritized for analyst review.
    → 94 x 404 responses, severity: High, score: 55
 
 2. Analyzer finds sensitive_path_access from 198.51.100.7
-   → /.env accessed, HTTP 200 returned
+   → /.env, /.git, /config accessed (3+ sensitive paths), score 35
 
-3. Multi-indicator bonus applied: combined score 55 + 60 + 20 = 100 (capped)
+3. Multi-indicator bonus applied: combined score 55 + 35 + 20 = 110 → capped at 100
    → Severity: Critical
 
 4. SOC L1 escalates to SOC L2:
@@ -108,11 +108,13 @@ The JSON report (`--format json`) is structured for downstream processing:
 {
   "incidents": [
     {
+      "incident_id": "INC-001",
       "source_ip": "203.0.113.45",
-      "severity": "critical",
-      "score": 90,
-      "findings": [...],
-      "evidence": {...}
+      "severity": "Critical",
+      "total_score": 90,
+      "finding_types": ["ssh_brute_force"],
+      "evidence": ["Total failed attempts: 312", "Targeted usernames: root, admin, ubuntu"],
+      "recommendations": ["..."]
     }
   ]
 }

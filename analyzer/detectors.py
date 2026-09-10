@@ -1,7 +1,7 @@
 from __future__ import annotations
 
-from collections import Counter, defaultdict
-from typing import Dict, Any, List, Optional
+from collections import defaultdict
+from typing import Any, Dict, List, Optional
 
 from .models import Finding, ParsedEvent
 from .scoring import score_to_severity
@@ -41,11 +41,12 @@ def detect_ssh_brute_force(events: List[ParsedEvent], cfg: Optional[Dict[str, An
         if cnt <= min_attempts:
             continue
         if cnt > high_threshold:
-            score, sev = 90, "Critical"
+            score = 90
         elif cnt > medium_threshold:
-            score, sev = 55, "High"
+            score = 55
         else:
-            score, sev = 30, "Medium"
+            score = 30
+        sev = score_to_severity(score)
 
         usernames = list({e.username for e in evs if e.username})
         first, last = _first_last([e.timestamp for e in evs])
@@ -82,7 +83,8 @@ def detect_web_scanning(events: List[ParsedEvent], cfg: Optional[Dict[str, Any]]
         cnt = len(evs)
         if cnt <= min_404_count:
             continue
-        score, sev = (55, "High") if cnt > high_threshold else (25, "Medium")
+        score = 55 if cnt > high_threshold else 25
+        sev = score_to_severity(score)
         sample_paths = list({e.url for e in evs if e.url})[:5]
         first, last = _first_last([e.timestamp for e in evs])
         findings.append(Finding(
@@ -110,7 +112,8 @@ def detect_sensitive_paths(events: List[ParsedEvent]) -> List[Finding]:
     findings = []
     for ip, evs in hits.items():
         cnt = len(evs)
-        score, sev = (35, "High") if cnt >= 3 else (15, "Medium")
+        score = 35 if cnt >= 3 else 15
+        sev = score_to_severity(score)
         paths_hit = list({e.url for e in evs})[:8]
         first, last = _first_last([e.timestamp for e in evs])
         findings.append(Finding(
@@ -140,11 +143,12 @@ def detect_suspicious_user_agents(events: List[ParsedEvent]) -> List[Finding]:
     for ip, evs in hits.items():
         uas = list({e.user_agent for e in evs if e.user_agent})[:3]
         first, last = _first_last([e.timestamp for e in evs])
+        score = 20
         findings.append(Finding(
             finding_type="suspicious_user_agent",
             source_ip=ip,
-            severity="Medium",
-            score=20,
+            severity=score_to_severity(score),
+            score=score,
             description=f"Possible automated security scanner activity from {ip}",
             evidence=[f"User-agents: {', '.join(uas)}", f"Request count: {len(evs)}"],
             recommendation="Automated scanner detected — correlate with sensitive path hits and 4xx responses. Block after manual confirmation.",
@@ -170,7 +174,8 @@ def detect_repeated_401_403(events: List[ParsedEvent], cfg: Optional[Dict[str, A
         cnt = len(evs)
         if cnt <= min_count:
             continue
-        score, sev = (45, "High") if cnt > high_threshold else (20, "Medium")
+        score = 45 if cnt > high_threshold else 20
+        sev = score_to_severity(score)
         first, last = _first_last([e.timestamp for e in evs])
         findings.append(Finding(
             finding_type="repeated_auth_errors",

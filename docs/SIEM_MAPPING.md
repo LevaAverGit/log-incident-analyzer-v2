@@ -50,44 +50,52 @@ used in SOC environments:
 
 ## JSON Report Structure
 
-The `--format json` output follows a flat structure that maps directly to
-SIEM alert fields:
+The `--format json` output puts incidents, findings, and the timeline in
+separate top-level arrays; `source_ip`, `severity`, and `finding_type` map
+directly to SIEM alert fields:
 
 ```json
 {
-  "generated_at": "2026-05-24T14:33:00",
+  "generated_at": "2026-09-11T02:13:17.510925",
   "summary": {
+    "source": "sample_logs/auth.log, sample_logs/nginx_access.log, sample_logs/syslog",
     "total_events": 229,
+    "parsing_errors": 0,
     "total_findings": 9,
-    "total_incidents": 5,
-    "critical_count": 2,
-    "high_count": 1,
-    "medium_count": 1,
-    "low_count": 1
+    "total_incidents": 5
   },
   "incidents": [
     {
-      "source_ip": "203.0.113.45",
-      "severity": "critical",
-      "score": 90,
-      "finding_types": ["ssh_brute_force"],
-      "findings": [
-        {
-          "finding_type": "ssh_brute_force",
-          "severity": "critical",
-          "score": 90,
-          "evidence": {
-            "attempt_count": 312,
-            "usernames_targeted": ["root", "admin", "ubuntu"]
-          },
-          "recommendation": "Block source IP at firewall."
-        }
-      ]
+      "incident_id": "INC-001",
+      "source_ip": "185.199.109.10",
+      "severity": "Critical",
+      "total_score": 100,
+      "finding_types": ["sensitive_path_access", "suspicious_user_agent", "web_scanning"],
+      "summary": "Multiple suspicious indicators from 185.199.109.10: ...",
+      "evidence": ["404 count: 31", "User-agents: Nikto/2.1.6"],
+      "recommendations": ["..."],
+      "first_seen": "20/May/2026:08:01:00 +0000",
+      "last_seen": "20/May/2026:08:01:35 +0000"
+    }
+  ],
+  "findings": [
+    {
+      "finding_type": "web_scanning",
+      "source_ip": "185.199.109.10",
+      "severity": "Medium",
+      "score": 25,
+      "evidence": ["404 count: 31", "Sample paths: /wp-includes/, /tmp/, /config/"],
+      "recommendation": "..."
     }
   ],
   "timeline": [...]
 }
 ```
+
+Severity strings are capitalized (`Critical`/`High`/`Medium`/`Low`); a consumer
+that expects lowercase should normalize on ingest. Per-finding detail lives in the
+top-level `findings` array, keyed to an incident by `source_ip`, not nested inside
+each incident.
 
 ### Ingestion options
 
